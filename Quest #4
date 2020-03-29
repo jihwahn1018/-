@@ -1,0 +1,59 @@
+const express = require('express')
+const bodyParser = require('body-parser')
+const app = express()
+const port = 8000
+var moment = require('moment');
+require('moment-timezone');
+moment.tz.setDefault("Asia/Seoul");
+
+var date = moment().format('YYYY-MM-DD HH:mm:ss');
+
+app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+        extended: true
+}))
+
+app.get('/',function(req,res){
+        var ip = req.headers['x-forwarded-for'] ||
+     req.connection.remoteAddress ||
+     req.socket.remoteAddress ||
+     req.connection.socket.remoteAddress;
+        if(ip[0] == ":"){
+                ip=ip.substr(7);
+        }
+
+        var info = {
+                "email" : "jihwahn1018@naver.com",
+                "stuno" : "20141362",
+                "time" : date,
+                "ip" : ip
+        }
+        Object.assign(info, req.query);
+        console.log(info);
+        res.send(info);
+});
+
+app.post('/',function(req,res){
+        var ip = req.headers['x-forwarded-for'] ||
+     req.connection.remoteAddress ||
+     req.socket.remoteAddress ||
+     req.connection.socket.remoteAddress;
+             if(ip[0] == ":"){
+                ip=ip.substr(7);
+        }
+
+        var info = {
+                "email" : "jihwahn1018@naver.com",
+                "stuno" : "20141362",
+                "time" : date,
+                "ip" : ip
+        }
+        Object.assign(info, req.body);
+        console.log(req.body);
+        console.log(info);
+        res.send(info);
+});
+
+app.listen(port, () => console.log(`Example app listenting on port ${port}!`))
+
