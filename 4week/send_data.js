@@ -4,8 +4,6 @@ var moment = require('moment');
 require('moment-timezone');
 moment.tz.setDefault("Asia/Seoul");
 
-var date = moment().format('YYYY-MM-DD HH:mm:ss');
-
 mysql = require('mysql');
 var connection = mysql.createConnection({
         host: 'localhost',
@@ -36,6 +34,7 @@ app.get('/', function(req, res) {
 app.get('/temp_sample', function(req, res) {
         r = req.query;
         console.log("GET %j", r);
+        var date = moment().format('YYYY-MM-DD HH:mm:ss');
 
         var info = {
                 "device_id" : r.device_id,
