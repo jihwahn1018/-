@@ -13,7 +13,7 @@ OneWire oneWire(13);
 DallasTemperature tempSensor(&oneWire);
 
 const char *ssid = "Hwan";
-const char *password = "91589158";
+const char *password = "------"; //password
 
 void setup() {
   // put your setup code here, to run once:
